@@ -1,4 +1,4 @@
-/*! uikit-core v0.1.0
+/*! uikit-core v0.1.1
 License: MIT. */
 
 (() => {
@@ -308,10 +308,30 @@ License: MIT. */
   function documentRoot() {
     return typeof document === "undefined" ? null : document;
   }
+  var scrollLock = null;
+  function scrollbarWidth(root) {
+    const view = typeof window === "undefined" ? null : window;
+    if (!view) return 0;
+    return Math.max(0, Math.round(view.innerWidth - root.clientWidth));
+  }
   function lockScroll(locked) {
     const doc = documentRoot();
     if (!doc) return;
-    doc.documentElement.style.overflow = locked ? "hidden" : "";
+    const root = doc.documentElement;
+    if (locked) {
+      if (scrollLock) return;
+      const width = scrollbarWidth(root);
+      scrollLock = { overflow: root.style.overflow, paddingRight: root.style.paddingRight };
+      root.style.setProperty("--ui-scrollbar-width", width + "px");
+      root.style.overflow = "hidden";
+      if (width > 0) root.style.paddingRight = width + "px";
+      return;
+    }
+    if (!scrollLock) return;
+    root.style.overflow = scrollLock.overflow;
+    root.style.paddingRight = scrollLock.paddingRight;
+    root.style.removeProperty("--ui-scrollbar-width");
+    scrollLock = null;
   }
   function overlayHost(element) {
     return element && element.closest ? element.closest("[data-ui-overlay]") : null;
