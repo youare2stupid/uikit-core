@@ -12,7 +12,8 @@
   ],
   "attributes": [
     "placement",
-    "data-tone"
+    "data-tone",
+    "data-state"
   ],
   "events": [
     "toast"

@@ -112,6 +112,56 @@ function bindGlobal() {
   on(doc, 'click', onClick);
 }
 
+const closers = new WeakMap();
+
+function finalizeClose(element) {
+  element.removeAttribute('open');
+  element.setAttribute('data-state', 'closed');
+}
+
+function exitAnimations(element) {
+  if (typeof element.getAnimations !== 'function') return [];
+  try {
+    return element.getAnimations({ subtree: true });
+  } catch (error) {
+    return element.getAnimations();
+  }
+}
+
+function runExit(element) {
+  const animations = exitAnimations(element);
+  if (animations.length === 0) {
+    finalizeClose(element);
+    return;
+  }
+
+  let pending = animations.length;
+  const guard = setTimeout(function () {
+    finalizeClose(element);
+  }, 700);
+  closers.set(element, guard);
+
+  const finish = function () {
+    pending -= 1;
+    if (pending > 0) return;
+    clearTimeout(guard);
+    closers.delete(element);
+    finalizeClose(element);
+  };
+
+  animations.forEach(function (animation) {
+    if (animation.finished && typeof animation.finished.then === 'function') animation.finished.then(finish, finish);
+    else animation.addEventListener('finish', finish, { once: true });
+  });
+}
+
+function cancelExit(element) {
+  const guard = closers.get(element);
+  if (guard === undefined) return;
+  clearTimeout(guard);
+  closers.delete(element);
+}
+
 export function isOverlayOpen(element) {
   return stack.some(function (entry) {
     return entry.element === element;
@@ -120,6 +170,7 @@ export function isOverlayOpen(element) {
 
 export function openOverlay(element, options) {
   if (!element || isOverlayOpen(element)) return null;
+  cancelExit(element);
   bindGlobal();
   const settings = options || {};
   const entry = {
@@ -145,11 +196,11 @@ export function closeOverlay(element, options) {
   if (index === -1) return false;
   const entry = stack.splice(index, 1)[0];
   const settings = options || {};
-  element.removeAttribute('open');
-  element.setAttribute('data-state', 'closed');
+  element.setAttribute('data-state', 'closing');
   if (stack.length === 0 && entry.lockScroll) lockScroll(false);
   if (settings.restoreFocus !== false) restoreFocus(entry.restoreTo);
   emit(element, 'close', { element });
+  runExit(element);
   return true;
 }
 

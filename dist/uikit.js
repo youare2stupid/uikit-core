@@ -1,4 +1,4 @@
-/*! uikit-core v0.1.1
+/*! uikit-core v0.1.3
 License: MIT. */
 
 var __defProp = Object.defineProperty;
@@ -353,6 +353,48 @@ function bindGlobal() {
   on(doc, "keydown", onKeydown);
   on(doc, "click", onClick);
 }
+var closers = /* @__PURE__ */ new WeakMap();
+function finalizeClose(element) {
+  element.removeAttribute("open");
+  element.setAttribute("data-state", "closed");
+}
+function exitAnimations(element) {
+  if (typeof element.getAnimations !== "function") return [];
+  try {
+    return element.getAnimations({ subtree: true });
+  } catch (error) {
+    return element.getAnimations();
+  }
+}
+function runExit(element) {
+  const animations = exitAnimations(element);
+  if (animations.length === 0) {
+    finalizeClose(element);
+    return;
+  }
+  let pending = animations.length;
+  const guard = setTimeout(function() {
+    finalizeClose(element);
+  }, 700);
+  closers.set(element, guard);
+  const finish = function() {
+    pending -= 1;
+    if (pending > 0) return;
+    clearTimeout(guard);
+    closers.delete(element);
+    finalizeClose(element);
+  };
+  animations.forEach(function(animation) {
+    if (animation.finished && typeof animation.finished.then === "function") animation.finished.then(finish, finish);
+    else animation.addEventListener("finish", finish, { once: true });
+  });
+}
+function cancelExit(element) {
+  const guard = closers.get(element);
+  if (guard === void 0) return;
+  clearTimeout(guard);
+  closers.delete(element);
+}
 function isOverlayOpen(element) {
   return stack.some(function(entry) {
     return entry.element === element;
@@ -360,6 +402,7 @@ function isOverlayOpen(element) {
 }
 function openOverlay(element, options) {
   if (!element || isOverlayOpen(element)) return null;
+  cancelExit(element);
   bindGlobal();
   const settings = options || {};
   const entry = {
@@ -384,11 +427,11 @@ function closeOverlay(element, options) {
   if (index === -1) return false;
   const entry = stack.splice(index, 1)[0];
   const settings = options || {};
-  element.removeAttribute("open");
-  element.setAttribute("data-state", "closed");
+  element.setAttribute("data-state", "closing");
   if (stack.length === 0 && entry.lockScroll) lockScroll(false);
   if (settings.restoreFocus !== false) restoreFocus(entry.restoreTo);
   emit(element, "close", { element });
+  runExit(element);
   return true;
 }
 function toggleOverlay(element, options) {
@@ -588,8 +631,27 @@ var UIToastHost = class extends HTMLElement {
     }
   }
   _removeToast(toast) {
-    if (!toast.isConnected) return;
-    toast.remove();
+    if (!toast.isConnected || toast.getAttribute("data-state") === "closing") return;
+    toast.setAttribute("data-state", "closing");
+    const animations = typeof toast.getAnimations === "function" ? toast.getAnimations() : [];
+    if (animations.length === 0) {
+      toast.remove();
+      return;
+    }
+    let pending = animations.length;
+    const guard = setTimeout(function() {
+      toast.remove();
+    }, 800);
+    const finish = function() {
+      pending -= 1;
+      if (pending > 0) return;
+      clearTimeout(guard);
+      toast.remove();
+    };
+    animations.forEach(function(animation) {
+      if (animation.finished && typeof animation.finished.then === "function") animation.finished.then(finish, finish);
+      else animation.addEventListener("finish", finish, { once: true });
+    });
   }
 };
 define("toast-host", UIToastHost);

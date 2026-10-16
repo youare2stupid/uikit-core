@@ -40,8 +40,30 @@ class UIToastHost extends HTMLElement {
   }
 
   _removeToast(toast) {
-    if (!toast.isConnected) return;
-    toast.remove();
+    if (!toast.isConnected || toast.getAttribute('data-state') === 'closing') return;
+    toast.setAttribute('data-state', 'closing');
+
+    const animations = typeof toast.getAnimations === 'function' ? toast.getAnimations() : [];
+    if (animations.length === 0) {
+      toast.remove();
+      return;
+    }
+
+    let pending = animations.length;
+    const guard = setTimeout(function () {
+      toast.remove();
+    }, 800);
+    const finish = function () {
+      pending -= 1;
+      if (pending > 0) return;
+      clearTimeout(guard);
+      toast.remove();
+    };
+
+    animations.forEach(function (animation) {
+      if (animation.finished && typeof animation.finished.then === 'function') animation.finished.then(finish, finish);
+      else animation.addEventListener('finish', finish, { once: true });
+    });
   }
 }
 
