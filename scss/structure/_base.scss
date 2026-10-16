@@ -33,6 +33,10 @@
   --ui-success-text: CanvasText;
 }
 
+html {
+  scrollbar-gutter: stable;
+}
+
 *,
 *::before,
 *::after {

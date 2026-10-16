@@ -1,9 +1,9 @@
 {
   "name": "uikit-core",
-  "version": "0.1.3",
+  "version": "0.1.4",
   "files": [
-    "dist/uikit.js 26997 B",
-    "dist/uikit.iife.js 29552 B",
-    "dist/uikit.css 7226 B"
+    "dist/uikit.js 27567 B",
+    "dist/uikit.iife.js 30146 B",
+    "dist/uikit.css 7255 B"
   ]
 }

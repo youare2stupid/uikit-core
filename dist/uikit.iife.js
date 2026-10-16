@@ -1,4 +1,4 @@
-/*! uikit-core v0.1.3
+/*! uikit-core v0.1.4
 License: MIT. */
 
 (() => {
@@ -314,13 +314,19 @@ License: MIT. */
     if (!view) return 0;
     return Math.max(0, Math.round(view.innerWidth - root.clientWidth));
   }
+  function gutterIsReserved(root) {
+    const view = typeof window === "undefined" ? null : window;
+    if (!view || typeof view.getComputedStyle !== "function") return false;
+    const gutter = view.getComputedStyle(root).scrollbarGutter || "";
+    return gutter.indexOf("stable") !== -1 || gutter.indexOf("both-edges") !== -1;
+  }
   function lockScroll(locked) {
     const doc = documentRoot();
     if (!doc) return;
     const root = doc.documentElement;
     if (locked) {
       if (scrollLock) return;
-      const width = scrollbarWidth(root);
+      const width = gutterIsReserved(root) ? 0 : scrollbarWidth(root);
       scrollLock = { overflow: root.style.overflow, paddingRight: root.style.paddingRight };
       root.style.setProperty("--ui-scrollbar-width", width + "px");
       root.style.overflow = "hidden";
@@ -395,9 +401,14 @@ License: MIT. */
     on(doc, "click", onClick);
   }
   var closers = /* @__PURE__ */ new WeakMap();
+  var closedEntries = /* @__PURE__ */ new WeakMap();
   function finalizeClose(element) {
     element.removeAttribute("open");
     element.setAttribute("data-state", "closed");
+    const entry = closedEntries.get(element);
+    closedEntries.delete(element);
+    if (!entry) return;
+    if (stack.length === 0 && entry.lockScroll) lockScroll(false);
   }
   function exitAnimations(element) {
     if (typeof element.getAnimations !== "function") return [];
@@ -431,6 +442,7 @@ License: MIT. */
     });
   }
   function cancelExit(element) {
+    closedEntries.delete(element);
     const guard = closers.get(element);
     if (guard === void 0) return;
     clearTimeout(guard);
@@ -469,7 +481,7 @@ License: MIT. */
     const entry = stack.splice(index, 1)[0];
     const settings = options || {};
     element.setAttribute("data-state", "closing");
-    if (stack.length === 0 && entry.lockScroll) lockScroll(false);
+    closedEntries.set(element, entry);
     if (settings.restoreFocus !== false) restoreFocus(entry.restoreTo);
     emit(element, "close", { element });
     runExit(element);
