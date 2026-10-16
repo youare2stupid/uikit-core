@@ -1,0 +1,44 @@
+:root {
+  --ui-space: 1rem;
+  --ui-space-xs: 4px;
+  --ui-space-sm: 8px;
+  --ui-radius: 0;
+  --ui-radius-sm: 4px;
+  --ui-font-size-xs: 12px;
+  --ui-surface: Canvas;
+  --ui-surface-inverted: CanvasText;
+  --ui-text: CanvasText;
+  --ui-text-inverted: Canvas;
+  --ui-muted: GrayText;
+  --ui-border: color-mix(in srgb, CanvasText 20%, transparent);
+  --ui-accent: LinkText;
+  --ui-overlay-backdrop: rgb(0 0 0 / 60%);
+  --ui-shadow: 0 12px 32px rgb(0 0 0 / 30%);
+  --ui-duration: 200ms;
+  --ui-duration-fast: 120ms;
+  --ui-duration-slow: 320ms;
+  --ui-focus-width: 2px;
+  --ui-focus-color: currentcolor;
+  --ui-focus-offset: 2px;
+  --ui-dialog-width: 32rem;
+  --ui-drawer-width: 22rem;
+  --ui-drawer-height: 18rem;
+  --ui-z-overlay: 500;
+  --ui-z-popover: 600;
+  --ui-z-tooltip: 650;
+  --ui-z-toast: 700;
+  --ui-error-surface: Canvas;
+  --ui-error-text: CanvasText;
+  --ui-success-surface: Canvas;
+  --ui-success-text: CanvasText;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+[hidden] {
+  display: none !important;
+}

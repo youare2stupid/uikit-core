@@ -1,0 +1,13 @@
+{
+  "repo": "https://github.com/youare2stupid/uikit-core",
+  "version": "v0.1.0",
+  "path": "vendor/uikit-core",
+  "include": [
+    "LICENSE",
+    "scss",
+    "dist",
+    "runtime",
+    "components",
+    "components.json"
+  ]
+}

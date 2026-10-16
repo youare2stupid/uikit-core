@@ -1,0 +1,34 @@
+<div class="demo-row">
+  <ui-tabs id="demo-tabs">
+    <div data-ui-role="tablist">
+      <button data-ui-role="tab" data-ui-target="tab-1">Overview</button>
+      <button data-ui-role="tab" data-ui-target="tab-2">Settings</button>
+      <button data-ui-role="tab" data-ui-target="tab-3">Security</button>
+    </div>
+    <div data-ui-role="panel" id="tab-1">
+      <h3>Overview</h3>
+      <p>This is the overview panel content.</p>
+    </div>
+    <div data-ui-role="panel" id="tab-2">
+      <h3>Settings</h3>
+      <p>Configure your preferences here.</p>
+    </div>
+    <div data-ui-role="panel" id="tab-3">
+      <h3>Security</h3>
+      <p>Manage your security settings.</p>
+    </div>
+  </ui-tabs>
+</div>
+
+<div class="demo-row">
+  <button class="demo-btn" onclick="document.getElementById('demo-tabs').select('tab-2')">Select Settings</button>
+  <span class="demo-note" id="demo-tabs-state">selected: </span>
+</div>
+
+<script type="module">
+  const tabs = document.getElementById('demo-tabs');
+  const state = document.getElementById('demo-tabs-state');
+  tabs.addEventListener('ui:change', (e) => {
+    state.textContent = 'selected: ' + e.detail.value;
+  });
+</script>

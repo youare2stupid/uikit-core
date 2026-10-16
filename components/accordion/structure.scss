@@ -1,0 +1,50 @@
+@use '../../scss/helpers/mixins' as mx;
+
+ui-accordion {
+  display: block;
+}
+
+ui-accordion [data-ui-role='item'] {
+  border-bottom: 1px solid var(--ui-border, currentcolor);
+}
+
+ui-accordion [data-ui-role='trigger'] {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  border: 0;
+  padding: var(--ui-space-sm, 8px) 0;
+  background: transparent;
+  color: var(--ui-text, CanvasText);
+  font: inherit;
+  text-align: start;
+  cursor: pointer;
+}
+
+ui-accordion [data-ui-role='trigger']:focus-visible {
+  @include mx.focus-ring;
+}
+
+ui-accordion [data-ui-role='content'] {
+  padding-bottom: var(--ui-space, 1rem);
+  color: var(--ui-text, CanvasText);
+}
+
+@include mx.motion-safe {
+  ui-accordion [data-ui-role='content']:not([hidden]) {
+    animation: ui-accordion-open var(--ui-duration-fast, 120ms) ease-out;
+  }
+}
+
+@keyframes ui-accordion-open {
+  from {
+    opacity: 0;
+    transform: translateY(-2px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}

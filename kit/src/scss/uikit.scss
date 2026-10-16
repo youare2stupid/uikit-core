@@ -1,0 +1,21 @@
+@use 'scss/helpers' with (
+  $ui-breakpoints: (
+    sm: 640px,
+    md: 768px,
+    lg: 1024px
+  )
+);
+@use 'scss/structure';
+
+:root {
+  --ui-space: 1.5rem;
+  --ui-radius: 0.5rem;
+  --ui-surface: #ffffff;
+  --ui-text: #14171a;
+  --ui-shadow: 0 16px 40px rgb(20 23 26 / 25%);
+}
+
+html[data-theme='dark'] {
+  --ui-surface: #191c1f;
+  --ui-text: #e8eaed;
+}

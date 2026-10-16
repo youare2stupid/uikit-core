@@ -1,0 +1,38 @@
+@use '../../scss/helpers/mixins' as mx;
+
+ui-tabs {
+  display: block;
+}
+
+ui-tabs [data-ui-role='tablist'] {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0;
+  border-bottom: 1px solid var(--ui-border, currentcolor);
+}
+
+ui-tabs [data-ui-role='tab'] {
+  border: 0;
+  border-bottom: 2px solid transparent;
+  padding: var(--ui-space-sm, 8px) var(--ui-space, 1rem);
+  background: transparent;
+  color: var(--ui-text, CanvasText);
+  font: inherit;
+  cursor: pointer;
+}
+
+ui-tabs [data-ui-role='tab'][aria-selected='true'] {
+  border-bottom-color: var(--ui-accent, LinkText);
+}
+
+ui-tabs [data-ui-role='tab']:focus-visible {
+  @include mx.focus-ring;
+}
+
+ui-tabs [data-ui-role='panel'] {
+  padding: var(--ui-space, 1rem) 0;
+}
+
+ui-tabs [data-ui-role='panel']:focus-visible {
+  @include mx.focus-ring;
+}

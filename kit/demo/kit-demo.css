@@ -1,0 +1,41 @@
+:root {
+  --kit-bg: #f4f4f5;
+  --kit-text: #14171a;
+  --kit-accent: #2f6feb;
+}
+
+html[data-theme='dark'] {
+  --kit-bg: #101214;
+  --kit-text: #e8eaed;
+  --kit-accent: #6ea8ff;
+}
+
+body {
+  margin: 0;
+  padding: 2rem;
+  background: var(--kit-bg);
+  color: var(--kit-text);
+  font-family: system-ui, sans-serif;
+}
+
+h1 {
+  font-size: 1.5rem;
+}
+
+.row {
+  display: flex;
+  gap: 0.75rem;
+  align-items: center;
+  flex-wrap: wrap;
+  margin-bottom: 1.5rem;
+}
+
+button {
+  border: 1px solid currentcolor;
+  border-radius: 8px;
+  padding: 0.5rem 1rem;
+  background: transparent;
+  color: inherit;
+  font: inherit;
+  cursor: pointer;
+}

@@ -1,0 +1,22 @@
+
+<div class="demo-row">
+  <ui-tooltip>
+    <button class="demo-btn" data-ui-role="trigger">Hover or Focus me</button>
+    <div data-ui-role="bubble">I am a tooltip!</div>
+  </ui-tooltip>
+</div>
+
+<div class="demo-row">
+  <ui-tooltip id="demo-tooltip">
+    <button class="demo-btn" data-ui-role="trigger">Check Placement</button>
+    <div data-ui-role="bubble">I flip based on space</div>
+  </ui-tooltip>
+  <span class="demo-note" id="demo-tooltip-state">state: hide</span>
+</div>
+
+<script type="module">
+  const tt = document.getElementById('demo-tooltip');
+  const state = document.getElementById('demo-tooltip-state');
+  tt.addEventListener('ui:show', () => (state.textContent = 'state: show'));
+  tt.addEventListener('ui:hide', () => (state.textContent = 'state: hide'));
+</script>

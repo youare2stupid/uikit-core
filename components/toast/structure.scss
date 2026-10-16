@@ -1,0 +1,81 @@
+@use '../../scss/helpers/mixins' as mx;
+
+ui-toast-host {
+  position: fixed;
+  z-index: var(--ui-z-toast, 700);
+  display: flex;
+  flex-direction: column;
+  gap: var(--ui-space-sm, 8px);
+  max-width: min(24rem, calc(100vw - 2 * var(--ui-space, 1rem)));
+  pointer-events: none;
+}
+
+ui-toast-host[placement='top-start'] {
+  inset: var(--ui-space, 1rem) auto auto var(--ui-space, 1rem);
+  align-items: flex-start;
+}
+
+ui-toast-host[placement='top-end'] {
+  inset: var(--ui-space, 1rem) var(--ui-space, 1rem) auto auto;
+  align-items: flex-end;
+}
+
+ui-toast-host[placement='bottom-start'] {
+  inset: auto auto var(--ui-space, 1rem) var(--ui-space, 1rem);
+  align-items: flex-start;
+}
+
+ui-toast-host[placement='bottom-end'] {
+  inset: auto var(--ui-space, 1rem) var(--ui-space, 1rem) auto;
+  align-items: flex-end;
+}
+
+ui-toast-host [data-ui-role='toast'] {
+  display: flex;
+  align-items: center;
+  gap: var(--ui-space-sm, 8px);
+  width: 100%;
+  border-radius: var(--ui-radius, 0);
+  padding: var(--ui-space-sm, 8px) var(--ui-space, 1rem);
+  background: var(--ui-surface, Canvas);
+  color: var(--ui-text, CanvasText);
+  box-shadow: var(--ui-shadow, 0 12px 32px rgb(0 0 0 / 30%));
+  pointer-events: auto;
+}
+
+ui-toast-host [data-ui-role='toast'][data-tone='error'] {
+  background: var(--ui-error-surface, Canvas);
+  color: var(--ui-error-text, CanvasText);
+}
+
+ui-toast-host [data-ui-role='toast'][data-tone='success'] {
+  background: var(--ui-success-surface, Canvas);
+  color: var(--ui-success-text, CanvasText);
+}
+
+ui-toast-host [data-ui-role='toast'] [data-ui-close] {
+  margin-inline-start: auto;
+  border: 0;
+  background: transparent;
+  color: inherit;
+  font: inherit;
+  cursor: pointer;
+}
+
+@include mx.motion-safe {
+  ui-toast-host [data-ui-role='toast'] {
+    animation: ui-toast-in var(--ui-duration, 200ms) ease-out;
+  }
+}
+
+@keyframes ui-toast-in {
+  from {
+    opacity: 0;
+    transform: translateY(4px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}

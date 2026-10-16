@@ -1,0 +1,22 @@
+
+<div class="demo-row">
+  <button class="demo-btn" data-ui-open data-ui-target="#demo-drawer">Open Drawer</button>
+  <span class="demo-note" id="demo-drawer-state">state: closed</span>
+</div>
+
+<ui-drawer id="demo-drawer" side="end">
+  <div class="demo-drawer-content">
+    <h3>Drawer Title</h3>
+    <p>Drawer content here.</p>
+    <div class="demo-row">
+      <button class="demo-btn" data-ui-close>Close</button>
+    </div>
+  </div>
+</ui-drawer>
+
+<script type="module">
+  const drawer = document.getElementById('demo-drawer');
+  const state = document.getElementById('demo-drawer-state');
+  drawer.addEventListener('ui:open', () => (state.textContent = 'state: open'));
+  drawer.addEventListener('ui:close', () => (state.textContent = 'state: closed'));
+</script>

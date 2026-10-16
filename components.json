@@ -1,0 +1,169 @@
+{
+  "name": "uikit-core",
+  "components": {
+    "accordion": {
+      "status": "stable",
+      "since": "0.1.0",
+      "logic": "components/accordion/logic.js",
+      "structure": "components/accordion/structure.scss",
+      "demo": "components/accordion/demo.html",
+      "roles": [
+        "item",
+        "trigger",
+        "content"
+      ],
+      "states": [
+        "single",
+        "open"
+      ],
+      "events": [
+        "toggle"
+      ],
+      "tokens": [
+        "--ui-space",
+        "--ui-border",
+        "--ui-surface",
+        "--ui-text",
+        "--ui-accent"
+      ]
+    },
+    "drawer": {
+      "status": "stable",
+      "since": "0.1.0",
+      "logic": "components/drawer/logic.js",
+      "structure": "components/drawer/structure.scss",
+      "demo": "components/drawer/demo.html",
+      "roles": [
+        "layer",
+        "box"
+      ],
+      "states": [
+        "open",
+        "data-state",
+        "side"
+      ],
+      "events": [
+        "open",
+        "close"
+      ],
+      "tokens": [
+        "--ui-surface",
+        "--ui-text",
+        "--ui-overlay-backdrop",
+        "--ui-shadow",
+        "--ui-z-overlay",
+        "--ui-drawer-width",
+        "--ui-drawer-height"
+      ]
+    },
+    "modal": {
+      "status": "stable",
+      "since": "0.1.0",
+      "logic": "components/modal/logic.js",
+      "structure": "components/modal/structure.scss",
+      "demo": "components/modal/demo.html",
+      "roles": [
+        "layer",
+        "box"
+      ],
+      "states": [
+        "open",
+        "data-state"
+      ],
+      "events": [
+        "open",
+        "close"
+      ],
+      "tokens": [
+        "--ui-space",
+        "--ui-radius",
+        "--ui-surface",
+        "--ui-text",
+        "--ui-overlay-backdrop",
+        "--ui-shadow",
+        "--ui-z-overlay"
+      ]
+    },
+    "tabs": {
+      "status": "stable",
+      "since": "0.1.0",
+      "logic": "components/tabs/logic.js",
+      "structure": "components/tabs/structure.scss",
+      "demo": "components/tabs/demo.html",
+      "roles": [
+        "tablist",
+        "tab",
+        "panel"
+      ],
+      "states": [
+        "aria-selected",
+        "hidden"
+      ],
+      "events": [
+        "change"
+      ],
+      "tokens": [
+        "--ui-space",
+        "--ui-border",
+        "--ui-surface",
+        "--ui-text",
+        "--ui-accent"
+      ]
+    },
+    "toast": {
+      "status": "stable",
+      "since": "0.1.0",
+      "logic": "components/toast/logic.js",
+      "structure": "components/toast/structure.scss",
+      "demo": "components/toast/demo.html",
+      "roles": [
+        "toast"
+      ],
+      "states": [
+        "placement",
+        "data-tone"
+      ],
+      "events": [
+        "toast"
+      ],
+      "tokens": [
+        "--ui-surface",
+        "--ui-text",
+        "--ui-shadow",
+        "--ui-z-toast",
+        "--ui-space",
+        "--ui-radius",
+        "--ui-error-surface",
+        "--ui-error-text",
+        "--ui-success-surface",
+        "--ui-success-text"
+      ]
+    },
+    "tooltip": {
+      "status": "stable",
+      "since": "0.1.0",
+      "logic": "components/tooltip/logic.js",
+      "structure": "components/tooltip/structure.scss",
+      "demo": "components/tooltip/demo.html",
+      "roles": [
+        "trigger",
+        "bubble"
+      ],
+      "states": [
+        "data-placement"
+      ],
+      "events": [
+        "show",
+        "hide"
+      ],
+      "tokens": [
+        "--ui-surface-inverted",
+        "--ui-text-inverted",
+        "--ui-space-xs",
+        "--ui-font-size-xs",
+        "--ui-radius-sm",
+        "--ui-z-tooltip"
+      ]
+    }
+  }
+}

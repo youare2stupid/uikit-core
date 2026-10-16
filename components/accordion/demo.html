@@ -1,0 +1,36 @@
+<div class="demo-row">
+  <ui-accordion id="demo-accordion" single>
+    <div data-ui-role="item" open>
+      <button data-ui-role="trigger">What is uikit-core?</button>
+      <div data-ui-role="content">
+        <p>uikit-core is a brand-neutral behavior layer for UI components.</p>
+      </div>
+    </div>
+    <div data-ui-role="item">
+      <button data-ui-role="trigger">How does it work?</button>
+      <div data-ui-role="content">
+        <p>It uses Custom Elements and a set of runtime utilities to ensure consistent behavior.</p>
+      </div>
+    </div>
+    <div data-ui-role="item">
+      <button data-ui-role="trigger">Is it customizable?</button>
+      <div data-ui-role="content">
+        <p>Yes, styling is decoupled from logic via data-ui-role attributes and CSS tokens.</p>
+      </div>
+    </div>
+  </ui-accordion>
+</div>
+
+<div class="demo-row">
+  <button class="demo-btn" onclick="document.getElementById('demo-accordion').openAll()">Open All</button>
+  <button class="demo-btn" onclick="document.getElementById('demo-accordion').closeAll()">Close All</button>
+  <span class="demo-note" id="demo-accordion-state">last toggle: none</span>
+</div>
+
+<script type="module">
+  const acc = document.getElementById('demo-accordion');
+  const state = document.getElementById('demo-accordion-state');
+  acc.addEventListener('ui:toggle', (e) => {
+    state.textContent = `last toggle: item ${e.detail.index} ${e.detail.open ? 'opened' : 'closed'}`;
+  });
+</script>

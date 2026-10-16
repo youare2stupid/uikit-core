@@ -1,0 +1,21 @@
+<div class="demo-row">
+  <button class="demo-btn" data-ui-open data-ui-target="#demo-modal">Open modal</button>
+  <span class="demo-note" id="demo-modal-state">state: closed</span>
+</div>
+
+<ui-modal id="demo-modal">
+  <div class="demo-dialog">
+    <h3>Modal title</h3>
+    <p>Behaviour comes from uikit-core, the look comes from this page.</p>
+    <div class="demo-row">
+      <button class="demo-btn" data-ui-close>Close</button>
+    </div>
+  </div>
+</ui-modal>
+
+<script type="module">
+  const modal = document.getElementById('demo-modal');
+  const state = document.getElementById('demo-modal-state');
+  modal.addEventListener('ui:open', () => (state.textContent = 'state: open'));
+  modal.addEventListener('ui:close', () => (state.textContent = 'state: closed'));
+</script>

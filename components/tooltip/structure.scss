@@ -1,0 +1,24 @@
+@use '../../scss/helpers/mixins' as mx;
+
+ui-tooltip {
+  display: inline-block;
+}
+
+ui-tooltip [data-ui-role='bubble'] {
+  position: fixed;
+  z-index: var(--ui-z-tooltip, 650);
+  max-width: 20rem;
+  border-radius: var(--ui-radius-sm, 4px);
+  padding: var(--ui-space-sm, 8px) var(--ui-space, 1rem);
+  background: var(--ui-surface-inverted, CanvasText);
+  color: var(--ui-text-inverted, Canvas);
+  font-size: var(--ui-font-size-xs, 12px);
+  line-height: 1.4;
+  pointer-events: none;
+}
+
+@include mx.motion-safe {
+  ui-tooltip [data-ui-role='bubble'] {
+    transition: opacity var(--ui-duration-fast, 120ms) ease;
+  }
+}

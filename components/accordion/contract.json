@@ -1,0 +1,46 @@
+{
+  "name": "accordion",
+  "tag": "ui-accordion",
+  "status": "stable",
+  "since": "0.1.0",
+  "markup": "<ui-accordion single>\n  <div data-ui-role=\"item\">\n    <button data-ui-role=\"trigger\">Header 1</button>\n    <div data-ui-role=\"content\">Content 1</div>\n  </div>\n  <div data-ui-role=\"item\">\n    <button data-ui-role=\"trigger\">Header 2</button>\n    <div data-ui-role=\"content\">Content 2</div>\n  </div>\n</ui-accordion>",
+  "roles": [
+    "item",
+    "trigger",
+    "content"
+  ],
+  "generated": [
+    "div[data-ui-role=item]",
+    "button[data-ui-role=trigger]",
+    "div[data-ui-role=content]"
+  ],
+  "attributes": [
+    "single",
+    "open"
+  ],
+  "events": [
+    "toggle"
+  ],
+  "methods": [
+    "toggle(index)",
+    "openAll()",
+    "closeAll()"
+  ],
+  "tokens": [
+    "--ui-space",
+    "--ui-border",
+    "--ui-surface",
+    "--ui-text",
+    "--ui-accent"
+  ],
+  "a11y": [
+    "aria-expanded",
+    "aria-controls",
+    "role=region"
+  ],
+  "keyboard": [
+    "Enter",
+    "Space"
+  ],
+  "reducedMotion": "transition is wrapped in prefers-reduced-motion: no-preference"
+}

@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>__KIT_NAME__ components</title>
+    <link rel="stylesheet" href="../dist/__KIT_NAME__.uikit.css" />
+    <link rel="stylesheet" href="kit-demo.css" />
+  </head>
+  <body>
+    <h1>__KIT_NAME__ components</h1>
+    <div class="row">
+      <button data-ui-open data-ui-target="#kit-modal">Open modal</button>
+      <button id="theme-toggle">Toggle theme</button>
+      <span id="state"></span>
+    </div>
+
+    <ui-modal id="kit-modal">
+      <h2>Modal</h2>
+      <p>Behaviour from uikit-core, look from __KIT_NAME__.</p>
+      <button data-ui-close>Close</button>
+    </ui-modal>
+
+    <script>
+      window.UIKitConfig = { theme: { storageKey: '__KIT_PREFIX__-theme' } };
+    </script>
+    <script src="../dist/__KIT_NAME__.uikit.js"></script>
+    <script>
+      UIKit.theme.initTheme();
+      var state = document.getElementById('state');
+      var paint = function () {
+        state.textContent = 'theme: ' + UIKit.theme.getTheme();
+      };
+      paint();
+      document.getElementById('theme-toggle').addEventListener('click', function () {
+        UIKit.theme.toggleTheme();
+        paint();
+      });
+    </script>
+  </body>
+</html>

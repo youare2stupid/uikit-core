@@ -1,0 +1,16 @@
+@use 'sass:map';
+@use 'tokens' as t;
+
+@function bp($name) {
+  $width: map.get(t.$ui-breakpoints, $name);
+
+  @if not $width {
+    @error 'Unknown breakpoint "#{$name}". Known: #{map.keys(t.$ui-breakpoints)}';
+  }
+
+  @return $width;
+}
+
+@function var-name($name) {
+  @return --#{t.$ui-prefix}-#{$name};
+}

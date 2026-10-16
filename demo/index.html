@@ -1,0 +1,251 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>uikit-core demo</title>
+    <link rel="stylesheet" href="../dist/uikit.css" />
+    <link rel="stylesheet" href="demo.css" />
+  </head>
+  <body>
+    <header class="demo-top">
+      <h1>uikit-core</h1>
+      <p class="demo-note">
+        Behaviour and structure come from the package. The look on this page is a demo theme only.
+      </p>
+      <nav class="demo-nav"><a href="#accordion">accordion</a><a href="#drawer">drawer</a><a href="#modal">modal</a><a href="#tabs">tabs</a><a href="#toast">toast</a><a href="#tooltip">tooltip</a></nav>
+      <div class="demo-row">
+        <button class="demo-btn" id="theme-toggle" type="button">Toggle theme</button>
+        <button class="demo-btn" id="motion-toggle" type="button">Toggle motion</button>
+        <span class="demo-note" id="theme-state"></span>
+      </div>
+    </header>
+    <main>
+<section class="demo-block" id="accordion">
+  <header class="demo-head">
+    <h2>accordion</h2>
+    <p class="demo-meta">events: ui:toggle</p>
+    <p class="demo-meta">tokens: --ui-space, --ui-border, --ui-surface, --ui-text, --ui-accent</p>
+  </header>
+  <div class="demo-body">
+<div class="demo-row">
+  <ui-accordion id="demo-accordion" single>
+    <div data-ui-role="item" open>
+      <button data-ui-role="trigger">What is uikit-core?</button>
+      <div data-ui-role="content">
+        <p>uikit-core is a brand-neutral behavior layer for UI components.</p>
+      </div>
+    </div>
+    <div data-ui-role="item">
+      <button data-ui-role="trigger">How does it work?</button>
+      <div data-ui-role="content">
+        <p>It uses Custom Elements and a set of runtime utilities to ensure consistent behavior.</p>
+      </div>
+    </div>
+    <div data-ui-role="item">
+      <button data-ui-role="trigger">Is it customizable?</button>
+      <div data-ui-role="content">
+        <p>Yes, styling is decoupled from logic via data-ui-role attributes and CSS tokens.</p>
+      </div>
+    </div>
+  </ui-accordion>
+</div>
+
+<div class="demo-row">
+  <button class="demo-btn" onclick="document.getElementById('demo-accordion').openAll()">Open All</button>
+  <button class="demo-btn" onclick="document.getElementById('demo-accordion').closeAll()">Close All</button>
+  <span class="demo-note" id="demo-accordion-state">last toggle: none</span>
+</div>
+
+<script type="module">
+  const acc = document.getElementById('demo-accordion');
+  const state = document.getElementById('demo-accordion-state');
+  acc.addEventListener('ui:toggle', (e) => {
+    state.textContent = `last toggle: item ${e.detail.index} ${e.detail.open ? 'opened' : 'closed'}`;
+  });
+</script>
+  </div>
+</section>
+
+<section class="demo-block" id="drawer">
+  <header class="demo-head">
+    <h2>drawer</h2>
+    <p class="demo-meta">events: ui:open, ui:close</p>
+    <p class="demo-meta">tokens: --ui-surface, --ui-text, --ui-overlay-backdrop, --ui-shadow, --ui-z-overlay, --ui-drawer-width, --ui-drawer-height</p>
+  </header>
+  <div class="demo-body">
+<div class="demo-row">
+  <button class="demo-btn" data-ui-open data-ui-target="#demo-drawer">Open Drawer</button>
+  <span class="demo-note" id="demo-drawer-state">state: closed</span>
+</div>
+
+<ui-drawer id="demo-drawer" side="end">
+  <div class="demo-drawer-content">
+    <h3>Drawer Title</h3>
+    <p>Drawer content here.</p>
+    <div class="demo-row">
+      <button class="demo-btn" data-ui-close>Close</button>
+    </div>
+  </div>
+</ui-drawer>
+
+<script type="module">
+  const drawer = document.getElementById('demo-drawer');
+  const state = document.getElementById('demo-drawer-state');
+  drawer.addEventListener('ui:open', () => (state.textContent = 'state: open'));
+  drawer.addEventListener('ui:close', () => (state.textContent = 'state: closed'));
+</script>
+  </div>
+</section>
+
+<section class="demo-block" id="modal">
+  <header class="demo-head">
+    <h2>modal</h2>
+    <p class="demo-meta">events: ui:open, ui:close</p>
+    <p class="demo-meta">tokens: --ui-space, --ui-radius, --ui-surface, --ui-text, --ui-overlay-backdrop, --ui-shadow, --ui-z-overlay</p>
+  </header>
+  <div class="demo-body">
+<div class="demo-row">
+  <button class="demo-btn" data-ui-open data-ui-target="#demo-modal">Open modal</button>
+  <span class="demo-note" id="demo-modal-state">state: closed</span>
+</div>
+
+<ui-modal id="demo-modal">
+  <div class="demo-dialog">
+    <h3>Modal title</h3>
+    <p>Behaviour comes from uikit-core, the look comes from this page.</p>
+    <div class="demo-row">
+      <button class="demo-btn" data-ui-close>Close</button>
+    </div>
+  </div>
+</ui-modal>
+
+<script type="module">
+  const modal = document.getElementById('demo-modal');
+  const state = document.getElementById('demo-modal-state');
+  modal.addEventListener('ui:open', () => (state.textContent = 'state: open'));
+  modal.addEventListener('ui:close', () => (state.textContent = 'state: closed'));
+</script>
+  </div>
+</section>
+
+<section class="demo-block" id="tabs">
+  <header class="demo-head">
+    <h2>tabs</h2>
+    <p class="demo-meta">events: ui:change</p>
+    <p class="demo-meta">tokens: --ui-space, --ui-border, --ui-surface, --ui-text, --ui-accent</p>
+  </header>
+  <div class="demo-body">
+<div class="demo-row">
+  <ui-tabs id="demo-tabs">
+    <div data-ui-role="tablist">
+      <button data-ui-role="tab" data-ui-target="tab-1">Overview</button>
+      <button data-ui-role="tab" data-ui-target="tab-2">Settings</button>
+      <button data-ui-role="tab" data-ui-target="tab-3">Security</button>
+    </div>
+    <div data-ui-role="panel" id="tab-1">
+      <h3>Overview</h3>
+      <p>This is the overview panel content.</p>
+    </div>
+    <div data-ui-role="panel" id="tab-2">
+      <h3>Settings</h3>
+      <p>Configure your preferences here.</p>
+    </div>
+    <div data-ui-role="panel" id="tab-3">
+      <h3>Security</h3>
+      <p>Manage your security settings.</p>
+    </div>
+  </ui-tabs>
+</div>
+
+<div class="demo-row">
+  <button class="demo-btn" onclick="document.getElementById('demo-tabs').select('tab-2')">Select Settings</button>
+  <span class="demo-note" id="demo-tabs-state">selected: </span>
+</div>
+
+<script type="module">
+  const tabs = document.getElementById('demo-tabs');
+  const state = document.getElementById('demo-tabs-state');
+  tabs.addEventListener('ui:change', (e) => {
+    state.textContent = 'selected: ' + e.detail.value;
+  });
+</script>
+  </div>
+</section>
+
+<section class="demo-block" id="toast">
+  <header class="demo-head">
+    <h2>toast</h2>
+    <p class="demo-meta">events: ui:toast</p>
+    <p class="demo-meta">tokens: --ui-surface, --ui-text, --ui-shadow, --ui-z-toast, --ui-space, --ui-radius, --ui-error-surface, --ui-error-text, --ui-success-surface, --ui-success-text</p>
+  </header>
+  <div class="demo-body">
+<div class="demo-row">
+  <button class="demo-btn" id="toast-success">Success Toast</button>
+  <button class="demo-btn" id="toast-error">Error Toast</button>
+  <button class="demo-btn" id="toast-info">Info Toast</button>
+</div>
+
+<ui-toast-host id="demo-toast" placement="bottom-end"></ui-toast-host>
+
+<script type="module">
+  const host = document.getElementById('demo-toast');
+  document.getElementById('toast-success').onclick = () => host.push({ text: 'Successfully saved!', tone: 'success' });
+  document.getElementById('toast-error').onclick = () => host.push({ text: 'Something went wrong', tone: 'error' });
+  document.getElementById('toast-info').onclick = () => host.push({ text: 'Update available', tone: 'info' });
+</script>
+  </div>
+</section>
+
+<section class="demo-block" id="tooltip">
+  <header class="demo-head">
+    <h2>tooltip</h2>
+    <p class="demo-meta">events: ui:show, ui:hide</p>
+    <p class="demo-meta">tokens: --ui-surface-inverted, --ui-text-inverted, --ui-space-xs, --ui-font-size-xs, --ui-radius-sm, --ui-z-tooltip</p>
+  </header>
+  <div class="demo-body">
+<div class="demo-row">
+  <ui-tooltip>
+    <button class="demo-btn" data-ui-role="trigger">Hover or Focus me</button>
+    <div data-ui-role="bubble">I am a tooltip!</div>
+  </ui-tooltip>
+</div>
+
+<div class="demo-row">
+  <ui-tooltip id="demo-tooltip">
+    <button class="demo-btn" data-ui-role="trigger">Check Placement</button>
+    <div data-ui-role="bubble">I flip based on space</div>
+  </ui-tooltip>
+  <span class="demo-note" id="demo-tooltip-state">state: hide</span>
+</div>
+
+<script type="module">
+  const tt = document.getElementById('demo-tooltip');
+  const state = document.getElementById('demo-tooltip-state');
+  tt.addEventListener('ui:show', () => (state.textContent = 'state: show'));
+  tt.addEventListener('ui:hide', () => (state.textContent = 'state: hide'));
+</script>
+  </div>
+</section>
+    </main>
+    <script src="../dist/uikit.iife.js"></script>
+    <script>
+      UIKit.configure({ theme: { storageKey: 'ui-theme' } });
+      UIKit.theme.initTheme();
+      UIKit.motion.initMotion();
+      var state = document.getElementById('theme-state');
+      var paint = function () {
+        state.textContent = 'theme: ' + UIKit.theme.getTheme() + ' · motion: ' + UIKit.motion.getMotion();
+      };
+      paint();
+      document.getElementById('theme-toggle').addEventListener('click', function () {
+        UIKit.theme.toggleTheme();
+        paint();
+      });
+      document.getElementById('motion-toggle').addEventListener('click', function () {
+        UIKit.motion.setMotion(UIKit.motion.motionEnabled() ? 'off' : 'on');
+        paint();
+      });
+    </script>
+  </body>
+</html>

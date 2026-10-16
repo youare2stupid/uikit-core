@@ -1,0 +1,33 @@
+name: Release
+
+on:
+  push:
+    tags: ['v*']
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+      - run: npm ci
+      - run: node tools/sync-inventory.js
+      - run: npm run build
+      - run: npm test
+      - name: Fail when committed artifacts are stale
+        run: git diff --exit-code -- dist components.json demo/index.html
+      - name: Pack a tarball for kits that do not use a registry
+        run: npm pack
+      - name: Attach bundles and the tarball to the GitHub release
+        uses: softprops/action-gh-release@v2
+        with:
+          files: |
+            dist/uikit.js
+            dist/uikit.iife.js
+            dist/build.json
+            components.json
+            *.tgz

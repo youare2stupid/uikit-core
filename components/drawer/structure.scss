@@ -1,0 +1,70 @@
+@use '../../scss/helpers/mixins' as mx;
+
+ui-drawer[data-ui-overlay] {
+  display: none;
+}
+
+ui-drawer[data-ui-overlay][open] {
+  display: block;
+}
+
+ui-drawer [data-ui-role='layer'] {
+  position: fixed;
+  z-index: var(--ui-z-overlay, 500);
+  inset: 0;
+  background: var(--ui-overlay-backdrop, rgb(0 0 0 / 60%));
+}
+
+ui-drawer [data-ui-role='box'] {
+  position: fixed;
+  display: flex;
+  flex-direction: column;
+  gap: var(--ui-space-sm, 8px);
+  overflow: auto;
+  padding: var(--ui-space, 1rem);
+  background: var(--ui-surface, Canvas);
+  color: var(--ui-text, CanvasText);
+  box-shadow: var(--ui-shadow, 0 12px 32px rgb(0 0 0 / 30%));
+}
+
+ui-drawer [data-ui-role='box'][data-side='start'] {
+  inset: 0 auto 0 0;
+  width: var(--ui-drawer-width, 22rem);
+  max-width: 100%;
+  transform: translateX(-100%);
+}
+
+ui-drawer [data-ui-role='box'][data-side='end'] {
+  inset: 0 0 0 auto;
+  width: var(--ui-drawer-width, 22rem);
+  max-width: 100%;
+  transform: translateX(100%);
+}
+
+ui-drawer [data-ui-role='box'][data-side='top'] {
+  inset: 0 0 auto;
+  height: var(--ui-drawer-height, 18rem);
+  max-height: 100%;
+  transform: translateY(-100%);
+}
+
+ui-drawer [data-ui-role='box'][data-side='bottom'] {
+  inset: auto 0 0;
+  height: var(--ui-drawer-height, 18rem);
+  max-height: 100%;
+  transform: translateY(100%);
+}
+
+@include mx.motion-safe {
+  ui-drawer [data-ui-role='box'] {
+    transition: transform var(--ui-duration, 200ms) ease;
+  }
+}
+
+ui-drawer[open] [data-ui-role='box'] {
+  transform: translate(0);
+}
+
+ui-drawer [data-ui-role='box']:focus-visible {
+  @include mx.focus-ring;
+}

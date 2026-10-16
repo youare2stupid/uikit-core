@@ -1,0 +1,42 @@
+{
+  "name": "toast",
+  "tag": "ui-toast-host",
+  "status": "stable",
+  "since": "0.1.0",
+  "markup": "<ui-toast-host placement=\"bottom-end\"></ui-toast-host>",
+  "roles": [
+    "toast"
+  ],
+  "generated": [
+    "div[data-ui-role=toast][role=status]"
+  ],
+  "attributes": [
+    "placement",
+    "data-tone"
+  ],
+  "events": [
+    "toast"
+  ],
+  "methods": [
+    "push({ text, tone, timeout })"
+  ],
+  "tokens": [
+    "--ui-surface",
+    "--ui-text",
+    "--ui-shadow",
+    "--ui-z-toast",
+    "--ui-space",
+    "--ui-radius",
+    "--ui-error-surface",
+    "--ui-error-text",
+    "--ui-success-surface",
+    "--ui-success-text"
+  ],
+  "a11y": [
+    "role=region",
+    "aria-live=polite",
+    "role=status for toasts"
+  ],
+  "keyboard": [],
+  "reducedMotion": "transition is wrapped in prefers-reduced-motion: no-preference"
+}

@@ -1,0 +1,52 @@
+{
+  "name": "drawer",
+  "tag": "ui-drawer",
+  "status": "stable",
+  "since": "0.1.0",
+  "markup": "<ui-drawer side=\"end\">\n  <button data-ui-open>Open</button>\n  <div>Content</div>\n</ui-drawer>",
+  "roles": [
+    "layer",
+    "box"
+  ],
+  "generated": [
+    "div[data-ui-role=layer]",
+    "div[data-ui-role=box][role=dialog][tabindex=-1]"
+  ],
+  "attributes": [
+    "open",
+    "data-state",
+    "side"
+  ],
+  "events": [
+    "open",
+    "close"
+  ],
+  "methods": [
+    "open()",
+    "close()",
+    "toggle()",
+    "isOpen",
+    "box"
+  ],
+  "tokens": [
+    "--ui-surface",
+    "--ui-text",
+    "--ui-overlay-backdrop",
+    "--ui-shadow",
+    "--ui-z-overlay",
+    "--ui-drawer-width",
+    "--ui-drawer-height"
+  ],
+  "a11y": [
+    "role=dialog",
+    "Escape closes",
+    "backdrop click closes",
+    "focus moves into the box",
+    "focus returns to the opener"
+  ],
+  "keyboard": [
+    "Escape",
+    "Tab"
+  ],
+  "reducedMotion": "transition is wrapped in prefers-reduced-motion: no-preference"
+}

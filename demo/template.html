@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>uikit-core demo</title>
+    <link rel="stylesheet" href="../dist/uikit.css" />
+    <link rel="stylesheet" href="demo.css" />
+  </head>
+  <body>
+    <header class="demo-top">
+      <h1>uikit-core</h1>
+      <p class="demo-note">
+        Behaviour and structure come from the package. The look on this page is a demo theme only.
+      </p>
+      <nav class="demo-nav"><!-- nav --></nav>
+      <div class="demo-row">
+        <button class="demo-btn" id="theme-toggle" type="button">Toggle theme</button>
+        <button class="demo-btn" id="motion-toggle" type="button">Toggle motion</button>
+        <span class="demo-note" id="theme-state"></span>
+      </div>
+    </header>
+    <main>
+<!-- components -->
+    </main>
+    <script src="../dist/uikit.iife.js"></script>
+    <script>
+      UIKit.configure({ theme: { storageKey: 'ui-theme' } });
+      UIKit.theme.initTheme();
+      UIKit.motion.initMotion();
+      var state = document.getElementById('theme-state');
+      var paint = function () {
+        state.textContent = 'theme: ' + UIKit.theme.getTheme() + ' · motion: ' + UIKit.motion.getMotion();
+      };
+      paint();
+      document.getElementById('theme-toggle').addEventListener('click', function () {
+        UIKit.theme.toggleTheme();
+        paint();
+      });
+      document.getElementById('motion-toggle').addEventListener('click', function () {
+        UIKit.motion.setMotion(UIKit.motion.motionEnabled() ? 'off' : 'on');
+        paint();
+      });
+    </script>
+  </body>
+</html>

@@ -1,0 +1,37 @@
+{
+  "name": "tooltip",
+  "tag": "ui-tooltip",
+  "status": "stable",
+  "since": "0.1.0",
+  "markup": "<ui-tooltip>\n  <button data-ui-role=\"trigger\">Hover me</button>\n  <div data-ui-role=\"bubble\">Tooltip text</div>\n</ui-tooltip>",
+  "roles": [
+    "trigger",
+    "bubble"
+  ],
+  "generated": [],
+  "attributes": [
+    "data-placement"
+  ],
+  "events": [
+    "show",
+    "hide"
+  ],
+  "methods": [],
+  "tokens": [
+    "--ui-surface-inverted",
+    "--ui-text-inverted",
+    "--ui-space-xs",
+    "--ui-font-size-xs",
+    "--ui-radius-sm",
+    "--ui-z-tooltip"
+  ],
+  "a11y": [
+    "aria-describedby connects trigger to bubble",
+    "hides on Escape",
+    "shows on focus"
+  ],
+  "keyboard": [
+    "Escape"
+  ],
+  "reducedMotion": "transition is wrapped in prefers-reduced-motion: no-preference"
+}

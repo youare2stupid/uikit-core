@@ -1,0 +1,61 @@
+{
+  "name": "uikit-core",
+  "version": "0.1.0",
+  "description": "Headless UI components: behaviour, markup contract and structural CSS. Styling lives in the kit.",
+  "license": "MIT",
+  "author": "youare2stupid",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/youare2stupid/uikit-core.git"
+  },
+  "homepage": "https://github.com/youare2stupid/uikit-core",
+  "bugs": {
+    "url": "https://github.com/youare2stupid/uikit-core/issues"
+  },
+  "type": "module",
+  "sass": "scss/index.scss",
+  "files": [
+    "LICENSE",
+    "dist",
+    "scss",
+    "runtime",
+    "components",
+    "components.json"
+  ],
+  "exports": {
+    ".": {
+      "import": "./dist/uikit.js",
+      "default": "./dist/uikit.js"
+    },
+    "./iife": "./dist/uikit.iife.js",
+    "./scss": "./scss/index.scss",
+    "./scss/structure": "./scss/structure/_index.scss",
+    "./scss/helpers": "./scss/helpers/_index.scss",
+    "./components.json": "./components.json"
+  },
+  "scripts": {
+    "build": "node tools/build.js && node tools/build-demo.js",
+    "demo": "node tools/build-demo.js && node tools/serve.js",
+    "test": "node --test",
+    "format": "prettier --write .",
+    "lint:scss": "stylelint \"scss/**/*.scss\" \"components/**/*.scss\"",
+    "pack": "node tools/sync-inventory.js && node tools/build.js && node tools/build-demo.js && npm pack"
+  },
+  "devDependencies": {
+    "esbuild": "^0.25.0",
+    "prettier": "^3.8.0",
+    "sass": "^1.105.0",
+    "stylelint": "^16.9.0",
+    "stylelint-config-standard-scss": "^13.0.0"
+  },
+  "keywords": [
+    "ui",
+    "components",
+    "web-components",
+    "headless",
+    "design-system"
+  ],
+  "engines": {
+    "node": ">=20"
+  }
+}

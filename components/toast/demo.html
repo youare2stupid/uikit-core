@@ -1,0 +1,15 @@
+
+<div class="demo-row">
+  <button class="demo-btn" id="toast-success">Success Toast</button>
+  <button class="demo-btn" id="toast-error">Error Toast</button>
+  <button class="demo-btn" id="toast-info">Info Toast</button>
+</div>
+
+<ui-toast-host id="demo-toast" placement="bottom-end"></ui-toast-host>
+
+<script type="module">
+  const host = document.getElementById('demo-toast');
+  document.getElementById('toast-success').onclick = () => host.push({ text: 'Successfully saved!', tone: 'success' });
+  document.getElementById('toast-error').onclick = () => host.push({ text: 'Something went wrong', tone: 'error' });
+  document.getElementById('toast-info').onclick = () => host.push({ text: 'Update available', tone: 'info' });
+</script>

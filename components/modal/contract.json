@@ -1,0 +1,54 @@
+{
+  "name": "modal",
+  "tag": "ui-modal",
+  "status": "stable",
+  "since": "0.1.0",
+  "markup": "<button data-ui-open data-ui-target=\"#my-modal\">Open</button>\n\n<ui-modal id=\"my-modal\">\n  <div>Content</div>\n</ui-modal>",
+  "roles": [
+    "layer",
+    "box"
+  ],
+  "generated": [
+    "div[data-ui-role=layer]",
+    "div[data-ui-role=box][role=dialog][aria-modal=true][tabindex=-1]"
+  ],
+  "attributes": [
+    "open",
+    "data-state"
+  ],
+  "events": [
+    "open",
+    "close"
+  ],
+  "methods": [
+    "open()",
+    "close()",
+    "toggle()",
+    "isOpen",
+    "box"
+  ],
+  "tokens": [
+    "--ui-space",
+    "--ui-radius",
+    "--ui-surface",
+    "--ui-text",
+    "--ui-overlay-backdrop",
+    "--ui-shadow",
+    "--ui-z-overlay"
+  ],
+  "a11y": [
+    "role=dialog",
+    "aria-modal=true",
+    "Escape closes",
+    "backdrop click closes",
+    "focus moves into the box",
+    "focus returns to the opener"
+  ],
+  "keyboard": [
+    "Escape",
+    "Tab"
+  ],
+  "reducedMotion": "transition is wrapped in prefers-reduced-motion: no-preference",
+  "requiresId": true,
+  "notes": "Triggers live outside the overlay host so they stay visible while it is closed."
+}

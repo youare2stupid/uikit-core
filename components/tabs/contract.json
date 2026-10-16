@@ -1,0 +1,50 @@
+{
+  "name": "tabs",
+  "tag": "ui-tabs",
+  "status": "stable",
+  "since": "0.1.0",
+  "markup": "<ui-tabs>\n  <div data-ui-role=\"tablist\">\n    <button data-ui-role=\"tab\" data-ui-target=\"panel-1\">Tab 1</button>\n    <button data-ui-role=\"tab\" data-ui-target=\"panel-2\">Tab 2</button>\n  </div>\n  <div data-ui-role=\"panel\" id=\"panel-1\">Content 1</div>\n  <div data-ui-role=\"panel\" id=\"panel-2\">Content 2</div>\n</ui-tabs>",
+  "roles": [
+    "tablist",
+    "tab",
+    "panel"
+  ],
+  "generated": [
+    "div[data-ui-role=tablist]",
+    "button[data-ui-role=tab]",
+    "div[data-ui-role=panel]"
+  ],
+  "attributes": [
+    "aria-selected",
+    "hidden"
+  ],
+  "events": [
+    "change"
+  ],
+  "methods": [
+    "select(id)",
+    "selected"
+  ],
+  "tokens": [
+    "--ui-space",
+    "--ui-border",
+    "--ui-surface",
+    "--ui-text",
+    "--ui-accent"
+  ],
+  "a11y": [
+    "role=tablist",
+    "role=tab",
+    "role=tabpanel",
+    "aria-selected",
+    "aria-controls",
+    "roving tabindex"
+  ],
+  "keyboard": [
+    "ArrowLeft",
+    "ArrowRight",
+    "Home",
+    "End"
+  ],
+  "reducedMotion": "no motion"
+}
